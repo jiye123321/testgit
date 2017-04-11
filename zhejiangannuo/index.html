@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>浙江安诺文化传播有限公司</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="move.js"></script>
+  <script>
+function getByClass(oParent,sClass){    	//封装getClassName函数
+ var aEle=oParent.getElementsByTagName('*');
+ var aResult=[];
+ for (var i = 0; i < aEle.length; i++) {
+  if(aEle[i].className==sClass){
+    aResult.push(aEle[i]);
+  }
+}
+return aResult;
+};
+window.onload=function()
+{
+	var oDiv=document.getElementById('playimages');
+	var oDivSmall=getByClass(oDiv,'paging')[0];
+	var aLiSmall=oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
+	
+	var oUlBig=getByClass(oDiv, 'big_pic')[0];
+	var aLiBig=oUlBig.getElementsByTagName('li');
+	var nowindex=2;
+	var oDiv2=document.getElementById('body2');
+	var aP=oDiv2.getElementsByTagName('p');
+	var oDiv3=document.getElementById('caidan');
+	var aImg=oDiv3.getElementsByTagName('img');
+	var oDiv4=document.getElementById('quan');
+	var aImg2=oDiv4.getElementsByTagName('img');
+ 	 var oDiv5=document.getElementById('chanpin2');
+ 	 var aImg3=oDiv5.getElementsByTagName('img');
+	 var oDiv6=document.getElementById('chanpin3');
+ 	 var aImg4=oDiv6.getElementsByTagName('img');
+	  var oDiv7=document.getElementById('chanpin4');
+ 	 var aImg5=oDiv7.getElementsByTagName('img');
+	  var oDiv8=document.getElementById('chanpin5');
+ 	 var aImg6=oDiv8.getElementsByTagName('img');
+	for(i=0; i<aLiSmall.length;i++)
+	{
+		aLiSmall[i].index=i;
+		aLiSmall[i].onclick=function()
+		{
+			
+			for(i=0;i<aLiSmall.length;i++)
+			{
+				aLiSmall[i].className='';
+				aLiBig[i].style.filter='alpha(opacity=30)';
+				aLiBig[i].style.opacity=0.3;
+			}
+			this.className='active';
+			aLiBig[this.index].style.zIndex=nowindex++;
+			startMove(aLiBig[this.index],{opacity:100})
+		};
+	};
+	for(j=0;j<aP.length;j++)
+	{
+		aP[j].onmouseover=function()
+		{
+			this.style.borderColor='#000';
+		}
+		startMove(aP[j].onmouseover,2000);
+		aP[j].onmouseout=function()
+		{
+			this.style.borderColor='#842720';
+		}
+		startMove(aP[j].onmouseout,2000);
+  	}
+  	oDiv3.onmouseover=oDiv3.onclick=function(){
+  		aImg[0].style.width='90px';
+  		aImg[0].style.margin='3px 8px';
+    }
+    oDiv3.onmouseout=function(){
+      aImg[0].style.width='106px';
+      aImg[0].style.margin='0';
+    }
+    oDiv4.onmouseover=function(){
+      aImg2[0].style.transform='rotate(90deg)';
+    }
+    oDiv4.onmouseout=function(){
+      aImg2[0].style.transform='rotate(0deg)';		
+    }
+    oDiv4.onmouseover=function(){
+    aImg2[0].style.transform='rotate(90deg)';
+  }
+  oDiv4.onmouseout=function()
+  {
+    aImg2[0].style.transform='rotate(0deg)';   
+  }
+  oDiv5.onmouseover=function(){
+    aImg3[0].style.width='70px';
+    aImg3[0].style.margin='1.2px 3px';
+  }
+  oDiv5.onmouseout=function(){
+    aImg3[0].style.width='76px';
+    aImg3[0].style.margin='0';
+  }
+   oDiv6.onmouseover=function(){
+    aImg4[0].style.width='70px';
+    aImg4[0].style.margin='1.2px 3px';
+  }
+  oDiv6.onmouseout=function(){
+    aImg4[0].style.width='76px';
+    aImg4[0].style.margin='0';
+  }
+   oDiv7.onmouseover=function(){
+    aImg5[0].style.width='70px';
+    aImg5[0].style.margin='1.2px 3px';
+  }
+  oDiv7.onmouseout=function(){
+    aImg5[0].style.width='76px';
+    aImg5[0].style.margin='0';
+  }
+   oDiv8.onmouseover=function(){
+    aImg6[0].style.width='70px';
+    aImg6[0].style.margin='1.2px 3px';
+  }
+  oDiv8.onmouseout=function(){
+    aImg6[0].style.width='76px';
+    aImg6[0].style.margin='0';
+  }
+
+};
+   
+
+</script>
+</head>
+<body>
+
+  <div class="head">
+   <p>
+     <img src="img/index_01_03.jpg" />
+     <span>Call us </span> 400 039 0988
+     <img src="img/index_01_05.jpg" />
+   </p>
+ </div>
+ <div class="head2">
+   <ul class="head1">
+    <li><a href="about.html">/关于我们/</a></li>
+    <li><a href="shouhou.html">/售后支持/</a></li>
+    <li class="active"><a href="index.html">/最新产品/</a></li>
+  </ul>
+</div>
+<div class="head3">
+</div>
+<div class="bodyzong">
+	<div class="body1" id="playimages">
+   <div id="playimages" class="play">
+    <ul class="big_pic">
+        	 <!--<div class="prev"></div>
+           <div class="next"></div>-->
+           <li style="z-index:1;"><img src="img/index_01.jpg" /></li>
+           <li><img src="img/index_01.jpg" /></li>
+           <li><img src="img/index_01.jpg" /></li>
+           <li><img src="img/index_01.jpg" /></li>
+         </ul> 
+         <ol class="paging">
+           <li class="active"><a href="javascript:;";></a></li>
+           <li><a href="javascript:;";></a></li>
+           <li><a href="javascript:;";></a></li>
+           <li><a href="javascript:;";></a></li>
+         </ol>
+       </div>
+       <div class="body2" id="body2">
+         <img src="img/index_02.jpg" />
+         <p class="circle"><a href="javascript:;">中草茶养</a></p>
+         <p class="circle1"></p>
+         <p class="circle"><a href="javascript:;">本草美颜</a></p>
+         <p class="circle1"></p>
+         <p class="circle"><a href="javascript:;">果木酵品</a></p>
+         <p class="circle1"></p>
+         <p class="circle"><a href="javascript:;">优选礼盒</a></p>
+       </div>
+     </div>
+     <div class="body3">
+      <p>店铺公告信息栏.................</p>
+      <input type="text" class="anniu" placeholder="商品搜索：请输入关键字" />
+    </div>
+    <div class="youhuiquan">
+    	<div class="demo">
+        <div class="stamp stamp01">
+         <a href="#">
+          <div class="par"><sub class="sign">￥</sub><span>1</span></div>
+          <div class="copy">无门槛使用</div>
+        </a>
+      </div>
+    </div>
+    <div class="demo">
+      <div class="stamp stamp01">
+        <a href="#">
+         <div class="par"><sub class="sign">￥</sub><span>2</span></div>
+         <div class="copy">满66元可使用</div></a>
+       </div>
+     </div>
+     <div class="demo">
+      <div class="stamp stamp01">
+       <a href="#">
+        <div class="par"><sub class="sign">￥</sub><span>3</span></div>
+        <div class="copy">满88元可使用</div></a>
+      </div>
+    </div>
+  </div>
+  <div class="jiankang">
+   <p>健康养生领导品牌</p>
+   <img src="img/index_03.jpg" />
+   <div class="quan" id="quan">
+    <img src="img/quan.png" />
+  </div>
+  <div class="caidan" id="caidan">
+   <a href="#">
+    <img src="img/index_04.jpg" />
+  </a>
+</div>
+</div>
+<img src="img/index_05.jpg" />
+<div class="goumai">
+  <div class="goumai1">
+    <p>PURCHASE</br>
+     A SINGLE PRODUCT
+   </p>
+ </div>
+ <div class="goumai2">
+
+   <p><a href="javascript:;">必购单品 </a></p>
+
+ </div>
+ <img src="img/index_06.jpg" />
+</div>
+<div class="chanpin">
+ <img src="img/index_067.jpg" />
+ <ul >
+   <li class="dierge">
+     <div class="chanpin1">
+      <a href="#">
+       <img src="img/chanpin1.jpg" />
+     </a>
+   </div>
+   <div class="chanpin2">
+     <div class="chanpin100">
+       <img src="img/chanpin.jpg" />
+     </div>
+     <p class="chanpin3">葛根茯苓茶</p>
+     <p class="chanpin4">5g/袋*8袋*4瓶</p>
+     <p class="chanpin5">/降脂解酒，护肝养胃/</p>
+     <div class="chanpin101" id="chanpin2">
+      <a href="#">
+        <img src="img/chanpin00.jpg"  class="chanoping"/>
+      </a>
+    </div>
+  </div>
+</li>
+<li class="dierge1">
+ <div class="chanpin1">
+  <a href="#">
+   <img src="img/chanpin1.jpg" />
+ </a>
+</div>
+<div class="chanpin2">
+ <div class="chanpin100">
+   <img src="img/chanpin.jpg" />
+ </div>
+ <p class="chanpin3">葛根茯苓茶</p>
+ <p class="chanpin4">5g/袋*8袋*4瓶</p>
+ <p class="chanpin5">/降脂解酒，护肝养胃/</p>
+ <div class="chanpin101" id="chanpin3">
+   <a href="#">
+    <img src="img/chanpin00.jpg"  class="chanoping"/>
+  </a>
+</div>
+</div>
+</li>
+<li class="dierge2">
+ <div class="chanpin1">
+  <a href="#">
+   <img src="img/chanpin1.jpg" />
+ </a>
+</div>
+<div class="chanpin2">
+ <div class="chanpin100">
+   <img src="img/chanpin.jpg" />
+ </div>
+ <p class="chanpin3">葛根茯苓茶</p>
+ <p class="chanpin4">5g/袋*8袋*4瓶</p>
+ <p class="chanpin5">/降脂解酒，护肝养胃/</p>
+ <div class="chanpin101" id="chanpin4">
+  <a href="#">
+    <img src="img/chanpin00.jpg"  class="chanoping"/> 
+  </a>
+</div>
+
+</div>
+</li>
+<li class="dierge3">
+ <div class="chanpin1">
+  <a href="#">
+   <img src="img/chanpin1.jpg" />
+ </a>
+</div>
+<div class="chanpin2">
+ <div class="chanpin100">
+   <img src="img/chanpin.jpg" />
+ </div>
+ <p class="chanpin3">葛根茯苓茶</p>
+ <p class="chanpin4">5g/袋*8袋*4瓶</p>
+ <p class="chanpin5">/降脂解酒，护肝养胃/</p>
+ <div class="chanpin101"  id="chanpin5">
+  <a href="#">
+    <img src="img/chanpin00.jpg"  class="chanoping"/>
+  </a>
+</div>
+</div>
+</li>
+<div class="beijing"></div>
+<div class="laojun">老君严选</div>
+</ul> 
+<img src="img/index_09.jpg" />
+<div class="arrow-up">
+</div>
+<div class="weibu">
+ <img src="img/index_10.jpg" />
+ <p><a href="#">店铺网站</a></p>
+ <p><a href="#">会员中心</a></p>
+ <p><a href="#">关注我们</a></p>
+ <img src="img/index_11.jpg" />
+</div>
+<div class="weibu2">
+</div>
+<div class="weibu3">
+ <p>Copyright © 2016 浙江安诺文化传播有限公司 保留所有权利 <a href="http://www.miibeian.gov.cn/">浙ICP备16031642号</a></p>
+</div>
+</div> 
+
+</div>
+
+</body>
+</html>
