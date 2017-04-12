@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fullpage</title>
+	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
+	<style>
+		.first{
+			background: red;
+		}
+		.second{
+			background: yellow;
+		}
+		.third{
+			background-color: green;
+		}
+		.forth{
+			background: pink;
+		}
+		.fivth{
+			background: #000;
+		}
+	</style>
+</head>
+<body>
+<div id="fullpageId">
+	<div class="first section"></div>
+	<div class="second section"></div>
+	<div class="third section"></div>
+	<div class="forth section"></div>
+	<div class="fivth section"></div>
+</div>
+<script>
+	$(function () {
+		$("#fullpageId").fullpage();
+	})
+</script>
+</body>
+</html>

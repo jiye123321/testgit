@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css实现的动画效果</title>
+	<style type="text/css">
+		.box{
+			width: 200px;
+			height: 200px;
+			background: pink;
+			animation: change 1s ease-in-out 1;
+
+		}
+		@keyframes change{
+			0%{
+				width: 200px;
+			}
+			100%{
+				width: 400px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

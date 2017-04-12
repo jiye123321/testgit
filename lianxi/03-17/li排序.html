@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#ul1{ background-color:green;}
+#ul2{ background-color:yellow;}
+</style>
+<script>
+window.onclick=function()
+{
+	var oUl1=document.getElementById('ul1');
+	var oUl2=document.getElementById('ul2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function()
+	{
+		var oLi=oUl1.children[0];
+		
+		//oUl1.removeChild(oLi);
+		oUl2.appendChild(oLi);     //1.先把元素从原有的父级上删掉 2.添加到新的父级
+	}
+}
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<input id="btn1" type="button" value="移动" />
+<ul id="ul2">
+</ul>
+</body>
+</html>

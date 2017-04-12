@@ -1,0 +1,285 @@
+DOM节点
+
+childNodes  节点   （IE6-8没有问题）  /children   元素节点  都兼容
+
+----------------------------------------------------------
+
+faafaafafaf   文本节点 
+<span>dsfas元素节点</span>
+
+
+----------------------------------------------------------
+
+/oUl.childNodes[i].nodetype  oUl的节点的节点类型
+
+nodrType==3  ->文本节点
+nodrType==1  ->元素节点
+
+----------------------------------------------------------
+子节点只算第一层
+
+----------------------------------------------------------
+parentNode   父节点
+
+
+----------------------------------------------------------
+offsetParent  可以获取一个元素用来定位的父节点
+
+
+----------------------------------------------------------
+首尾子节点
+  有兼容性问题
+  firstChild  firstElementChild
+  lastChild   lastElementChild
+
+
+----------------------------------------------------------
+//IE6-8
+//oUl.firstChild.style.backgroundColor='red';
+
+//高级浏览器
+//oUl.firstElementChild.style.backgroundColor='red';
+
+
+解决兼容性问题的方法
+if(oUl.firstElementChild)
+{
+	oUl.firstElementChild.style.background='red';
+}
+else
+{
+	oUl.firstChild.style
+}
+
+
+
+----------------------------------------------------------
+  兄弟节点
+  有兼容性问题
+  nextSibling,      nextElementSibling
+  previousSibling,   previousElementSibling
+
+
+
+----------------------------------------------------------
+操作元素的属性
+
+
+元素属性操作
+ 第一种：oDiv.style.display='block';
+ 第二种：oDiv.style["displey"]="block";
+ 第三种：DOM
+
+----------------------------------------------------------
+DOM方式操作元素属性
+
+ 获取：getSttribute(名称)
+ 设置：setAttribute('名称','值')      oTxt.setAttribute('value','值')
+ 删除：removeAttribute(名称)
+
+----------------------------------------------------------
+DOM元素灵活查找
+
+-用className选择元素
+  选出所有元素
+  通过className条件筛选
+
+	for(i=0;i<aLi.length;i++)
+	{
+		if(aLi[i].className=='box')
+		{
+			aLi[i].style.background='red';
+		}
+	}
+
+
+----------------------------------------------------------
+-----封装成函数
+function getByClass(oParent,sClass)
+{
+	var aResult=[];
+	var aEle=oParent.getElementsByTagName('*');
+	for(i=0;i<aEle.length;i++)
+	{
+		if(aEle[i].className==sClass)
+		{
+			aResult.push(aEle[i])
+		}
+	}
+	return aResult;
+}
+
+window.onload=function()
+{
+	var oUl=document.getElementById('ul1');
+	var aBox=getByclass(oUl,'box');
+
+	for(i=0,i<aBox.length;i++)
+	{
+		aBox[i.style.backgroundColor='red';]
+	}
+};
+
+
+
+==============================================================
+==============================================================
+
+
+创建DOM元素
+ createElement(标签名)        创建一个节点
+父级.appendChild(子节点)          给东西添加子节点
+
+--------------------------------------------------
+插入元素
+
+父级.insertBefore（节点，在谁之前插的节点） 
+
+--------------------------------------------------
+删除DOM元素
+ -removeChild(节点)      删除一个节点
+
+
+--------------------------------------------------
+文档碎片(在低性能的浏览器上有用，能提高浏览器性能。现在基本上没用)
+
+文档碎片可以提高DOM操作性能（理论上）
+文档碎片原理
+document.createDocumentFragment()
+
+
+--------------------------------------------------
+
+DOM的高级应用
+
+
+--------------------------------------------------
+表格应用-1
+
+
+oTab.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[1].getElementsByTagName['td'][1].innerHTML
+
+简易写法
+
+oTab.tBodies[0].rows[1].cells[1].innerHTML
+
+
+
+
+tbody--->tBodies
+tr--->rows
+td--->cells
+tHead
+tFoot
+
+
+--------------------------------------------------
+在表格中忽略大小写
+
+sTab.toLowerCase()
+
+
+--------------------------------------------------
+search
+
+var str='abcdef';
+
+alert(str.search('g'));    //找到并返回字符串出现的位置，如果没找就返回-1
+ 
+
+--------------------------------------------------
+split（把字符串切分）
+
+var str='abc 123 ert';
+var arr=str.split(' ');
+
+alert(arr);
+
+得到 abc,123,ert 三块内容
+
+arr.length==3
+
+
+
+--------------------------------------------------
+筛选就是display的应用
+
+--------------------------------------------------window.onclick=function()
+{
+	var oUl1=document.getElementById('ul1');
+	var oUl2=document.getElementById('ul2');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function()
+	{
+		var oLi=oUl1.children[0];
+		
+		//oUl1.removeChild(oLi);
+		oUl2.appendChild(oLi);     
+			
+	}
+}
+
+
+
+
+
+appendChild
+ 1.先把元素从原有的父级上删掉 2.添加到新的父级
+
+
+--------------------------------------------------
+排序
+
+sort是数组特有的
+li不算数组
+
+--------------------------------------------------
+表单排序
+
+window.onload=function()
+{
+	var oTab=document.getElementById('tab1');
+	var oBtn=document.getElementById('btn1');
+	
+	btn1.onclick=function()
+	{
+		var arr=[];
+		for(i=0;i<oTab.tBodies[0].rows.length;i++)
+		{
+			arr[i]=oTab.tBodies[0].rows[i];
+		}
+		arr.sort(function(tr1,tr2){
+			var n1=parseInt(tr1.cells[2].innerHTML);
+			var n2=parseInt(tr2.cells[2].innerHTML);
+			return n1-n2;
+		})
+		
+		for(i=0;i<arr.length;i++)
+		{
+			oTab.tBodies[0].appendChild(arr[i]);
+		};
+	}
+};
+</script>
+
+--------------------------------------------------
+表单事件
+
+onsubmit  就是在点击提交的时候  和onclock有点像
+onreset   就是在表单重置时发生
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

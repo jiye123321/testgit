@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="jianyi.css" rel="stylesheet" type="text/css" />
+<script>
+window.onload=function()
+{
+	var arr=[
+	'一月，，，，，，，153',
+	'fsdags',
+	'asgasgsgsagas',
+	'fhbdfgagsd',
+	'fagagrgfg',
+	'tgrgf',
+	]
+	var oTab=document.getElementById('tab');
+	var oUl=oTab.getElementsByTagName('li');
+	var oDiv=oTab.getElementsByTagName('div')[0];
+	for(i=0;i<oUl.length;i++)
+	{	
+		oUl[i].index=i	
+		oUl[i].onmouseover=function()
+		{
+			
+			for(i=0;i<oUl.length;i++)
+			{
+				oUl[i].className='';
+			}
+			this.className='active';
+			oDiv.innerHTML='<h2>'+(this.index+1)+'月</h2> <p>'+arr[this.index]+'</p>';
+		}	
+	};
+	
+
+	
+};
+</script>
+</head>
+
+<body>
+<div id="tab" class="calendar">
+	<ul>
+    	<li class="active"><h2>1<h2><p>JAN</p></li>
+        <li><h2>2<h2><p>FER</p></li>
+        <li><h2>3<h2><p>MAR</p></li>
+        <li><h2>4<h2><p>APR</p></li>
+        <li><h2>5<h2><p>MAR</p></li>
+        <li><h2>6<h2><p>JUN</p></li>
+    </ul>
+    <div class="div1">
+    	<h2>一月</h2> <p>一月，，，，，，，153</p>
+    </div>
+</div>
+</body>
+</html>
