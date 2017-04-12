@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+div{ width:200px; height:200px; margin:20px; float:left; background-color:yellow; border:10px solid black; font-size:14px;}
+</style>
+<script>
+window.onload=function()
+{
+	var oDiv1=document.getElementById('div1');
+	
+	oDiv1.onmouseover=function()
+	{
+		startMove(this,'height',400);
+	};
+	oDiv1.onmouseout=function()
+	{
+		startMove(this,'height',200);
+	};
+	var oDiv2=document.getElementById('div2');
+	
+	oDiv2.onmouseover=function()
+	{
+		startMove(this,'width',400);
+	};
+	oDiv2.onmouseout=function()
+	{
+		startMove(this,'width',200);
+	};
+	var oDiv3=document.getElementById('div3');
+	
+	oDiv3.onmouseover=function()
+	{
+		startMove(this,'font-size',50);
+	};
+	oDiv3.onmouseout=function()
+	{
+		startMove(this,'font-size',14);
+	};
+	var oDiv4=document.getElementById('div4');
+	
+	oDiv4.onmouseover=function()
+	{
+		startMove(this,'borderWidth',100);
+	};
+	oDiv4.onmouseout=function()
+	{
+		startMove(this,'borderWidth',10);
+	};
+};
+function getStyle(obj,name)     //去除offsetLeft
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[name];
+	}
+};
+function startMove(obj,attr,iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		var cur=parseInt(getStyle(obj,attr));
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj,timer)
+		}
+		else
+		{
+			obj.style[attr]=cur+speed+'px';
+		}
+		},30);
+};
+</script>
+</head>
+
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+<div id="div3">agaggaag</div>
+<div id="div4"></div>
+</body>
+</html>

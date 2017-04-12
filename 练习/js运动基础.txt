@@ -1,0 +1,321 @@
+运动基础
+
+ 小例子-让div运动起来----匀速运动
+ 
+	速度--物体运动的快慢
+  运动中的BUG：
+ 	不会停止
+	速度取到某值时会无法停止
+	到达位置后再点击还会运动
+	重复点击速度加快
+
+------------------------------------------------------------
+var timer=null;
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);      //在开启定时器前要先清除，不然多点几次，速度就会加倍
+	timer=setInterval(function()
+	{
+		var speed=1;
+		if(oDiv.offsetLeft>=300)      //1.让他在300px的位置停止
+					//	2.若是没有>号，offsetLeft的值不是speed的倍数就会不停止
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';   //要把这个放到else里面，不然到达位置后再点击还会运动
+		}
+	},30)
+};
+
+------------------------------------------------------------
+运动框架
+
+-在开始运动时，关闭已有定时器
+-把运动和停止隔开（if/else）
+
+------------------------------------------------------------
+分享实例
+
+<script>
+window.onload=function()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function()
+	{
+		startMove(0);
+	};
+	oDiv.onmouseout=function()
+	{
+		startMove(-150);
+	};
+};
+
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var speed=0;
+		if(oDiv.offsetLeft>iTarget)
+		{
+			speed=-10;
+		}
+		else
+		{
+			speed=10;
+		};
+		if(oDiv.offsetLeft==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		}
+		},30);
+};
+</script>
+
+------------------------------------------------------------
+图片的淡入淡出：alpha的一些东西(用变量来存透明度)
+
+
+<script>
+window.onload=function()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.onmouseover=function()
+	{
+		startMove(100);
+	};
+	oDiv.onmouseout=function()
+	{
+		startMove(30);
+	};
+};
+
+var alpha=30;
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var speed=0;
+		
+		if(alpha<iTarget)
+		{
+			speed=5;
+		}
+		else
+		{
+			speed=-5;
+		}
+		if(alpha==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			alpha+=speed;
+			
+			oDiv.style.filter='alpha(opacity:'+alpha+')';
+			oDiv.style.opacity=alpha/100;
+		}
+		}, 30);
+}
+</script>
+
+
+
+
+------------------------------------------------------------
+缓冲运动（在缓冲运动中一定不要忘记取整）
+
+-逐渐变慢，最后停止
+-目标位置和实际位置距离越远速度越小
+
+速度和距离成正比 
+
+Math.cell向上取整
+
+Math.floor向下取整
+
+可能的问题： 速度取整
+跟随页面滚动的缓冲侧边栏问题：目标值不是整数时
+
+------------------------------------------------------------
+
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	setInterval(function(){
+		var speed=(300-oDiv.offsetLeft)/10
+		//speed=Math.floor(speed);
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);  //有了这个向左向右都可以
+		
+		oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		
+		document.title=oDiv.offsetLeft+','+speed;   //就是在标题上显示速度，距离什么的
+		},30);
+};
+
+
+
+------------------------------------------------------------
+右侧悬浮框
+
+scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 
+
+
+onscroll：当浏览器滚动条滚动时会触发 onscroll 事件，通常情况下指上下滚动条滚动。
+
+offsetTop:获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置 
+------------------------------------------------------------
+不完善代码
+
+window.onscroll=function()
+{
+	var oDiv=document.getElementById('div1');
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;  //为了获取浏览器滚动条滚动的距离  兼容
+	oDiv.style.top=document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop+'px';          //页面可视区的高度-div自身的高度+滚动条滚动的距离 
+	
+};
+
+
+
+------------------------------------------------------------
+完善代码（会有个缓冲）
+
+
+<script>
+window.onscroll=function()
+{
+	var oDiv=document.getElementById('div1');
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;  //为了获取浏览器滚动条滚动的距离  兼容
+	startMove(document.documentElement.clientHeight-oDiv.offsetHeight+scrollTop);       //页面可视区的高度-div自身的高度+滚动条滚动的距离 
+	
+};
+
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var speed=(iTarget-oDiv.offsetTop)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(oDiv.offsetTop==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.top=oDiv.offsetTop+speed+'px';
+		}
+		},30);
+};
+</script>
+
+
+
+
+------------------------------------------------------------
+对联悬浮框
+
+<script>
+window.onscroll=function()
+{
+	var oDiv=document.getElementById('div1');
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;  //为了获取浏览器滚动条滚动的距离  兼容
+	//oDiv.style.top=(document.documentElement.clientHeight-oDiv.offsetHeight)/2+scrollTop+'px';        
+//页面可视区的高度-div自身的高度+滚动条滚动的距离
+	startMove(parseInt((document.documentElement.clientHeight-oDiv.offsetHeight)/2+scrollTop)); 
+};
+
+var timer=null;
+
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);
+	timer=setInterval(function(){
+		var speed=(iTarget-oDiv.offsetTop)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(oDiv.offsetTop==iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			document.title=iTarget;
+			document.getElementById('txt1').value=oDiv.offsetTop;
+			oDiv.style.top=oDiv.offsetTop+speed+'px';
+		}
+		},30);
+};
+</script>
+
+
+
+
+------------------------------------------------------------
+匀速运动停止
+
+绝对值：Math.abs()
+
+<script>
+var timer=null;
+function startMove(iTarget)
+{
+	var oDiv=document.getElementById('div1');
+	clearInterval(timer);
+	 timer=setInterval(function(){
+		var speed=0;
+		if(oDiv.offsetLeft<iTarget)
+		{
+			speed=7;
+		}
+		else
+		{
+			speed=-7;
+		}
+		
+		if(Math.abs(iTarget-oDiv.offsetLeft)<=7)
+		{
+			clearInterval(timer);
+			oDiv.style.left=iTarget+'px';
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';
+		}
+		},30);
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+

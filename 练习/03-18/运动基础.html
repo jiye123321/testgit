@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#div1{ width:200px; height:200px; background-color:red; position:absolute; top:50px; left:0px;}
+</style>
+<script>
+var timer=null;
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	
+	clearInterval(timer);      //在开启定时器前要先清除，不然多点几次，速度就会加倍
+	timer=setInterval(function()
+	{
+		var speed=1;
+		if(oDiv.offsetLeft>=300)      //1.让他在300px的位置停止
+					//	2.若是没有>号，offsetLeft的值不是speed的倍数就会不停止
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv.style.left=oDiv.offsetLeft+speed+'px';   //要把这个放到else里面，不然到达位置后再点击还会运动
+		}
+	},30)
+};
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="开始运动" onclick=" startMove()" />
+<div id="div1">
+</div>
+</body>
+</html>

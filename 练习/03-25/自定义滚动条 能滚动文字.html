@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+#parent{ width:600px; height:20px; background-color:#ccc; position:relative; margin:10px auto;}
+#div1{ width:20px; height:20px; background-color:red; position:absolute; left:0; top:0;}
+#div2{ width:400px; height:300px; border:1px solid black; position:relative; overflow:hidden; background-color:green;}
+#div3{ position:absolute; top:0; left:0; padding:4px;}
+</style>
+<script>
+window.onload=function()
+{
+	var oDiv=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var oDiv3=document.getElementById('div3');
+	var oParent=document.getElementById('parent');
+	var disX=0;
+	
+	oDiv.onmousedown=function(ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+		document.onmousemove=function(ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			if(l<0)
+			{
+				l=0;
+			}
+			else if(l>oParent.offsetWidth-oDiv.offsetWidth)
+			{
+				l=oParent.offsetWidth-oDiv.offsetWidth;
+			}
+			oDiv.style.left=l+'px';
+			var scale=l/(oParent.offsetWidth-oDiv.offsetWidth);
+			//oDiv2.style.width=400*scale+'px';
+			//oDiv2.style.height=400*scale+'px';
+			document.title=scale;
+			oDiv3.style.top=-scale*(oDiv3.offsetHeight-oDiv2.offsetHeight)+'px';
+			
+		};
+		
+		document.onmouseup=function()    //document是为了防止移动速度太快而移出框造成问题
+		{
+			document.onmousemove=null;
+			document.onmousemoup=null;
+		};
+		return false;       //为了防止火狐下的小Bug   当拖拽文字图片的时候，chrom,ff,IE9能够解决拖拽的时候会不小心会选中文字
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="parent">
+	<div id="div1"></div>
+</div>
+<div id="div2">
+	<div id="div3">scrollWidth是对象的实际内容的宽，不包边线宽度，会随对象中内容的多少改变（内容多了可能会改变对象的实际宽度）
+clientWidth是对象可见的宽度，不包滚动条等边线，会随窗口的显示大小改变。
+offsetWidth是对象的可见宽度，包滚动条等边线，会随窗口的显示大小改变。
+scrollHeight: 获取对象的滚动高度。
+offsetHeight:获取对象相对于版面或由父坐标
+scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离
+offsetLeft:获取对象相对于版面或由
+scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离
+offsetTop 属性指定的父坐标的计算顶端位置
+offsetParent 属性指定的父坐标的高度
+offsetParent 属性指定的父坐标的计算左侧位置
+event.clientX 相对文档的水平座标
+event.clientY 相对文档的垂直座标
+event.offsetX 相对容器的水平坐标
+event.offsetY 相对容器的垂直坐标
+document.documentElement.scrollTop 垂直方向滚动的值 event.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量 　　
+以上主要指IE之中，FireFox差异如下：
+IE6.0、FF1.06+：
+clientWidth = width + padding clientHeight = height + padding
+offsetWidth = width + padding + border
+offsetHeight = height + padding + border
+IE5.0/5.5：
+clientWidth = width - border
+clientHeight = height - border
+    </div>
+</div>
+</body>
+</html>
